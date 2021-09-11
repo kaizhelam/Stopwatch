@@ -1,47 +1,34 @@
-var seconds = 00;
-var tens = 00;
-var OutputSeconds = document.getElementById('second');
-var OutputTens = document.getElementById('tens');
-var buttonStart = document.getElementById('btn-start');
-var buttonStop = document.getElementById('btn-stop');
-var buttonReset = document.getElementById('btn-reset');
-var Interval;
+let seconds = 00;
+let tens = 00;
+let OutputSeconds = document.getElementById('second');
+let OutputTens = document.getElementById('tens');
+let buttonStart = document.getElementById('btn-start');
+let buttonStop = document.getElementById('btn-stop');
+let buttonReset = document.getElementById('btn-reset');
+let Interval;
 
 buttonStart.addEventListener('click', () => {
     clearInterval(Interval);
     Interval = setInterval(startTime, 10);
 });
-
-buttonStop.addEventListener('click', () => {
-    clearInterval(Interval);
-});
-
+buttonStop.addEventListener('click', () => clearInterval(Interval));
 buttonReset.addEventListener('click', () => {
     clearInterval(Interval);
-    tens = "00";
-    seconds = "00";
+    seconds = tens = "00";
     OutputSeconds.innerHTML = seconds;
     OutputTens.innerHTML = tens;
 });
 
 function startTime(){
     tens++;
-    if(tens <= 9){
-        OutputTens.innerHTML = "0" + tens;
-    }
-
-    if(tens > 9){
-        OutputTens.innerHTML = tens;
-    }
-
+    if(tens <= 9)OutputTens.innerHTML = "0" + tens;
+    else OutputTens.innerHTML = tens;
+    
     if(tens > 99){
         seconds++;
-        OutputSeconds.innerHTML = "0" + seconds;
+        if(seconds > 9)OutputSeconds.innerHTML = seconds;
+        else OutputSeconds.innerHTML = "0" + seconds;
         tens = 0;
         OutputTens.innerHTML = "0" + tens;
-    }
-
-    if(seconds > 9){
-        OutputSeconds.innerHTML = seconds;
     }
 }
